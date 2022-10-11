@@ -15,11 +15,11 @@ function App() {
       <div className="row">
         <div className="col">
           <h3>Синхронные посты</h3>
-          <Posts posts={[]}/>
+          <Posts/>
         </div>
         <div className="col">
           <h3>Асинхронные посты</h3>
-          <FetchedPosts posts={[]}/>
+          <FetchedPosts />
         </div>
       </div>
     </div>
