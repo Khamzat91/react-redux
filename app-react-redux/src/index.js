@@ -6,8 +6,8 @@ import reportWebVitals from './reportWebVitals';
 import {Provider} from "react-redux";
 import thunk from 'redux-thunk'
 import { rootReducer } from './redux/rootReducer';
-
-const store = createStore(rootReducer, applyMiddleware(thunk))
+import { forbiddenWordsMiddleware } from './redux/Middleware';
+const store = createStore(rootReducer, applyMiddleware(thunk, forbiddenWordsMiddleware))
 
 const app = (
     <Provider store={store}>

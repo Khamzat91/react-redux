@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import {createPost} from "../redux/action";
+import {createPost, showAlert} from "../redux/action";
+import Alert from "./Alert";
 
 class PostForm extends React.Component {
   constructor(props) {
@@ -16,7 +17,7 @@ class PostForm extends React.Component {
     const { title } = this.state;
 
     if(!title.trim()){
-      return
+      return this.props.showAlert('Без ввода в поле невозможно создать')
     }
 
     const newPost = {
@@ -40,9 +41,10 @@ class PostForm extends React.Component {
   render() {
     return (
       <form onSubmit={this.submitHandler}>
+        {this.props.alert && <Alert text={this.props.alert}/>}
         <div className="mb-3">
           <label htmlFor="title" className="form-label">
-            Зоголовок поста
+            <h3>Зоголовок поста</h3>
           </label>
           <input
             onChange={this.changeInputHandlet}
@@ -62,7 +64,11 @@ class PostForm extends React.Component {
 }
 
 const mapDispathToProps = {
-  createPost
+  createPost, showAlert
 }
 
-export default connect(null, mapDispathToProps)(PostForm);
+const mapStateToProps = state => ({
+   alert: state.app.alert
+})
+
+export default connect(mapStateToProps, mapDispathToProps)(PostForm);
